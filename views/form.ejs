@@ -46,7 +46,7 @@
       
       <h1>Uw gegevens</h1>
       
-      <form>
+      <form action="/upload" method="post" enctype='multipart/form-data'>
         <div class="form-group col-md-4">
             <label for="firstName">Voornaam</label>
             <input type="text" class="form-control" id="firstName" value="<%=firstname%>" readonly>
@@ -61,7 +61,7 @@
         </div>
         <div class="form-group col-md-6">
             <label for="email">Uw email</label>
-            <input type="email" class="form-control" id="email" placeholder="Uw email">
+            <input type="email" class="form-control" id="email" name="emailFrom" placeholder="Uw email">
         </div>
         <div class="form-group col-md-6">
             <label for="email">Nogmaals uw email</label>
@@ -70,14 +70,14 @@
         <h1>Aangetekende brief</h1>
         <div class="form-group">
             <label for="exampleInputFile">Selecteer uw document</label>
-            <input type="file" id="exampleInputFile">
+            <input type="file" id="exampleInputFile" name="inputfile">
             <p class="help-block">Klik om een lokaal document te selecteren</p>
         </div>
         
         <h1>Gegevens bestemmeling</h1>
           <div class="form-group">
             <label for="emailTo">Email bestemmeling</label>
-            <input type="email" class="form-control" id="emailTo" placeholder="Email bestemmeling">
+            <input type="email" class="form-control" id="emailTo" name="emailTo" placeholder="Email bestemmeling">
           </div>
 
           <button type="submit" class="btn btn-primary">Submit</button>
@@ -86,7 +86,7 @@
   
       </div>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   </body>
 </html>
