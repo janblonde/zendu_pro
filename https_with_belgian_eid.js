@@ -30,24 +30,34 @@ var app = express();
 //var httpsApp = express();
 
 // Handle Authentication (and other errors)
-app.use(app.router);
-app.use(function(err, req, res, next) { 
-    res.send("#FAIL : " + err);
+//app.use(app.router);
+app.use(function(err, req, res, next) {
+    if(err){
+        console.log(err);
+        res.send("#FAIL : " + err);
+    }
     next();
 });
 
-// Define some routes
-app.get('/', function(req, res) {
-    res.send("Welcome click <a href=\"https://www.zendu.be:4443/eid\">here</a> to login with your Belgian eID.");
-});
+app.use(express.static('public'));
 
-app.get('/eid', clientCertificateAuth(validateCertificate), function(req, res) {
+app.set('view engine', 'ejs');
+
+// Define some routes
+/*app.get('/', function(req, res) {
+    res.send("Welcome click <a href=\"https://www.zendu.be:4443/eid\">here</a> to login with your Belgian eID.");
+});*/
+
+app.get('/form', clientCertificateAuth(validateCertificate), function(req, res) {
     //if(clientCertificateAuth(validateCertificate)){
         var clientCertificate   = req.connection.getPeerCertificate();
         var clientName           = clientCertificate.subject.SN;
         var clientFirstName      = clientCertificate.subject.GN;
         var clientNationalNumber = clientCertificate.subject.serialNumber;
-        res.send("Welcome " + clientFirstName + " " + clientName + " (" + clientNationalNumber + ")!");
+        
+        res.render('form', {firstname: clientFirstName, lastname: clientName, rrn: clientNationalNumber});
+        
+        //res.send("Welcome " + clientFirstName + " " + clientName + " (" + clientNationalNumber + ")!");
     //}else{
     //    res.send("FAIL");
     //}
