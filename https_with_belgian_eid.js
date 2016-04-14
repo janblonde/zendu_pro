@@ -88,11 +88,17 @@ function validateCertificate(cert) {
 var upload = multer({dest: './uploads/'});
 
 app.post('/upload', upload.any(), function(req, res) {
+    //TODO: optimize the async of save/sign/send
+    
     //console.log(req);
     console.log(req.body);
     console.log(req.body.email);
     console.log(req.files[0].filename);
     
+    //sign and timestamp the pdf
+    signPDF(req.files[0].filename);
+    
+    //save data to db
     var brief = new Brief({
         emailFrom: req.body.emailFrom,
         emailTo: req.body.emailTo,
@@ -102,9 +108,21 @@ app.post('/upload', upload.any(), function(req, res) {
     
     brief.save(function(err, doc){
         if(!err){
-            mySendMail(doc);
+            //send mail to recipient
             console.log(doc.id);
             console.log(doc.emailTo);
+            var text = "Klik op deze link om uw identiteit te bevestigen en de aangetekende brief te ontvangen: " + 
+                       "http://www.zendu.be:3000/confirm/" + doc.id;
+            var subject = "U ontving een digitale aangetekende brief";
+            mySendMail(doc.emailTo, subject, text);
+            
+            //send mail to sender
+            text = "Uw document werd goed door ons ontvangen en wordt aangetekend verstuurd naar " + doc.emailTo + ". <br>" +
+            " Als bijlage de PDF (signed en timestamped).";
+            subject = "Uw aangetekende brief";
+            mySendMailWithAttachment(doc.emailFrom, subject, text,req.files[0].filename+'.pdf');
+            
+            res.render('confirm', {});
         }else{
             console.log(err);
             return res.send(500,err);
@@ -119,14 +137,47 @@ app.post('/upload', upload.any(), function(req, res) {
     
 });
 
-function mySendMail(doc){
+function signPDF(filename) {
+    
+    var exec = require('child_process').exec;
+    var cmd = "PLOPLinux/bin/plop --signopt 'digitalid={filename=ssl/demorsa2048.p12} passwordfile=ssl/pw.txt timestamp={source={url={https://tsa.safestamper.com/} username=jan.blonde@icloud.com password=ciFEja51  sslcertfile=ssl/SafeCreative_TSA.cer}}' --outfile signed/"+filename+".pdf uploads/"+filename;
+
+    exec(cmd, function(error, stdout, stderr) {
+        if(error) console.log('ERROR:' + error);
+      // command output is in stdout
+    });
+}
+
+function mySendMail(emailTo,subjectText, bodyText){
 
     smtpTransport.sendMail({
         from:'info@zendu.be',
-        to:doc.emailTo,
-        subject: 'U ontving een digitale aangetekende brief',
-        text: "Klik op deze link om uw identiteit te bevestigen en de aangetekende brief te ontvangen: " + 
-              "http://www.zendu.be:3000/confirm/" + doc.id
+        to:emailTo,
+        subject: subjectText,
+        text: bodyText
+    }, function (error, response){
+       if(error){
+           console.log("E-mail sending FAIL: " + error);
+       }else{
+           console.log('message sent: ' + response.response);
+       }
+    });
+}
+
+function mySendMailWithAttachment(emailTo, subjectText, bodyText, fileName){
+
+    smtpTransport.sendMail({
+        from:'info@zendu.be',
+        to:emailTo,
+        subject: subjectText,
+        text: bodyText,
+        attachments: [
+            {
+                filename: fileName,
+                path: 'signed/' + fileName,
+                contentType:'application/pdf'
+            }    
+        ]
     }, function (error, response){
        if(error){
            console.log("E-mail sending FAIL: " + error);
@@ -148,14 +199,18 @@ app.get('/confirm/:token', function(req,res){
         }else{
             console.log(doc.emailTo);
             
-            smtpTransport.sendMail({
+            mySendMailWithAttachment(doc.emailTo, 'Uw aangetekende brief', 'Zie bijlage', doc.docID + '.pdf');
+            
+            res.render('confirm', {});
+            
+/*            smtpTransport.sendMail({
                 from:'info@zendu.be',
                 to: doc.emailTo,
                 subject: 'Uw aangetekende brief',
                 text: 'Zie bijlage',
                 attachments: [
                     {filename:doc.docID + '.pdf',
-                     path:'uploads/' + doc.docID,
+                     path:'signed/' + doc.docID + '.pdf',
                      contentType:'application/pdf'}
                 ]
             }, function (error, response){
@@ -164,7 +219,7 @@ app.get('/confirm/:token', function(req,res){
                }else{
                    console.log('message sent: ' + response.response);
                }
-            });
+            });*/
         }
     });
 });
