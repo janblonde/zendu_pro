@@ -28,9 +28,9 @@ var smtpTransport = nodemailer.createTransport({
 
 // Store the certificate details for later use
 var httpsOptions = {
-    key: fs.readFileSync('/etc/ssl/private/myserver.key', 'utf8'), 
-    cert: fs.readFileSync('/etc/ssl/certs/www_zendu_be.crt', 'utf8'),
-    ca: [   fs.readFileSync('ssl/geotrust_cross_root_ca.txt', 'utf8'), 
+    key: fs.readFileSync('ssl/myserver.key', 'utf8'),
+    cert: fs.readFileSync('ssl/www_zendu_be.crt', 'utf8'),
+    ca: [   fs.readFileSync('ssl/geotrust_cross_root_ca.txt', 'utf8'),
             fs.readFileSync('ssl/rapid_ssl_ca.txt', 'utf8'),
             fs.readFileSync('ssl/citizen_ca.txt', 'utf8'),
             fs.readFileSync('ssl/belgium_root_ca.txt', 'utf8'),
@@ -69,9 +69,9 @@ app.get('/form', clientCertificateAuth(validateCertificate), function(req, res) 
         var clientName           = clientCertificate.subject.SN;
         var clientFirstName      = clientCertificate.subject.GN;
         var clientNationalNumber = clientCertificate.subject.serialNumber;
-        
+
         res.render('form', {firstname: clientFirstName, lastname: clientName, rrn: clientNationalNumber});
-        
+
         //res.send("Welcome " + clientFirstName + " " + clientName + " (" + clientNationalNumber + ")!");
     //}else{
     //    res.send("FAIL");
@@ -89,15 +89,15 @@ var upload = multer({dest: './uploads/'});
 
 app.post('/upload', upload.any(), function(req, res) {
     //TODO: optimize the async of save/sign/send
-    
+
     //console.log(req);
     console.log(req.body);
     console.log(req.body.email);
     console.log(req.files[0].filename);
-    
+
     //sign and timestamp the pdf
     signPDF(req.files[0].filename);
-    
+
     //save data to db
     var brief = new Brief({
         emailFrom: req.body.emailFrom,
@@ -105,42 +105,42 @@ app.post('/upload', upload.any(), function(req, res) {
         docID: req.files[0].filename,
         createdAt: new Date(Date.now())
     });
-    
+
     brief.save(function(err, doc){
         if(!err){
             //send mail to recipient
             console.log(doc.id);
             console.log(doc.emailTo);
-            var text = "Klik op deze link om uw identiteit te bevestigen en de aangetekende brief te ontvangen: " + 
-                       "http://www.zendu.be:3000/confirm/" + doc.id;
+            var text = "Klik op deze link om uw identiteit te bevestigen en de aangetekende brief te ontvangen: " +
+                       "http://localhost:3000/confirm/" + doc.id;
             var subject = "U ontving een digitale aangetekende brief";
             mySendMail(doc.emailTo, subject, text);
-            
+
             //send mail to sender
             text = "Uw document werd goed door ons ontvangen en wordt aangetekend verstuurd naar " + doc.emailTo + ". <br>" +
             " Als bijlage de PDF (signed en timestamped).";
             subject = "Uw aangetekende brief";
             mySendMailWithAttachment(doc.emailFrom, subject, text,req.files[0].filename+'.pdf');
-            
+
             res.render('confirm', {});
         }else{
             console.log(err);
             return res.send(500,err);
         }
     });
-    
+
 /*    db.collection('brieven').insertOne({docID: req.files[0].filename,
                                         emailFrom: req.body.emailFrom,
                                         emailTo: req.body.emailTo}, mySendMail);*/
-                                        
+
     //sign and timestamp the pdf
-    
+
 });
 
 function signPDF(filename) {
-    
+
     var exec = require('child_process').exec;
-    var cmd = "PLOPLinux/bin/plop --signopt 'digitalid={filename=ssl/demorsa2048.p12} passwordfile=ssl/pw.txt timestamp={source={url={https://tsa.safestamper.com/} username=jan.blonde@icloud.com password=ciFEja51  sslcertfile=ssl/SafeCreative_TSA.cer}}' --outfile signed/"+filename+".pdf uploads/"+filename;
+    var cmd = "../PLOP/bin/plop --signopt 'digitalid={filename=ssl/demorsa2048.p12} passwordfile=ssl/pw.txt' --outfile signed/"+filename+".pdf uploads/"+filename;
 
     exec(cmd, function(error, stdout, stderr) {
         if(error) console.log('ERROR:' + error);
@@ -176,7 +176,7 @@ function mySendMailWithAttachment(emailTo, subjectText, bodyText, fileName){
                 filename: fileName,
                 path: 'signed/' + fileName,
                 contentType:'application/pdf'
-            }    
+            }
         ]
     }, function (error, response){
        if(error){
@@ -191,18 +191,18 @@ function mySendMailWithAttachment(emailTo, subjectText, bodyText, fileName){
 app.get('/confirm/:token', function(req,res){
     console.log("confirm");
     console.log(req.params);
-    
+
     //query db for e-mail
     Brief.findById(req.params.token, function(error, doc){
         if(error){
             console.log("ERROR: " + error);
         }else{
             console.log(doc.emailTo);
-            
+
             mySendMailWithAttachment(doc.emailTo, 'Uw aangetekende brief', 'Zie bijlage', doc.docID + '.pdf');
-            
+
             res.render('confirm', {});
-            
+
 /*            smtpTransport.sendMail({
                 from:'info@zendu.be',
                 to: doc.emailTo,

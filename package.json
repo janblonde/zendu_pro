@@ -17,7 +17,12 @@
   },
   "homepage": "https://github.com/jeroenmoors/nodettps",
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "client-certificate-auth": "^0.3.0",
+    "ejs": "~1.0",
     "express": "~3.4.6",
-    "ejs": "~1.0"
+    "mongoose": "^4.4.12",
+    "multer": "^1.1.0",
+    "nodemailer": "^2.3.2"
   }
 }
