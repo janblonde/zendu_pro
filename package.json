@@ -4,7 +4,8 @@
   "description": "https experiments in node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "express": "~3.4.6",
     "mongoose": "^4.4.12",
     "multer": "^1.1.0",
-    "nodemailer": "^2.3.2"
+    "nodemailer": "^2.3.2",
+    "request": "^2.71.0"
   }
 }

@@ -1,92 +1,416 @@
 <html>
-  <head>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  </head>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="description" content="Aangetekende brief">
+<meta name="author" content="Zendu Aangetekende brieven versturen">
+<title>Zendu | Aangetekende brief verzenden</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/jasny-bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="css/animate.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="css/feedback.css">
+<link type="image/x-icon" rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABKUlEQVQ4jb3SzyvlURjH8VdYiKRrrh/ZzP9AtsJfwHYm1CT8ARQ7ljasLPwJmt1sLGz8aGzUdJMuM/KjFPmxkMRkgcV51O3mq1vKU6fO0znvz/N8nnP4xBjCbzzgHw4qBfNYwT2WMYIOnFQCt2IPRXTjF+bxHY9ZUA168AOnAefQjP0Q+YntcjCHCcnfc6xdNJTcaUcvnvCtvOp6tLWEaxTQiK4Qfy2yh9Xy6lUYxR2OsIk6jEUnnWGhiL9oyfI/IE17AsMBj0flgjT5tiy4DXO4KpnBIGrxp0TszfgSrZ1hQ/osz5iM/CLyviyBKdxKQ4M1XAZ0jtkQyfR+iOnY56OTOfSH8H8sZMGkd13EDG6kD/M1zkawhab3BI4l3zuS7/qy8+r34A/FC5cqTDh6ZYEVAAAAAElFTkSuQmCC">
+</head>
+
   <body>
     <div class="container">
 
       <!-- Static navbar -->
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Zendu</a>
+      <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+          <div class="container-fluid">
+              <a href="/" class="navbar-brand">
+                  <span style="color: white; font-size: 24px;">Zen</span><span style="color: firebrick; font-size: 24px;">du</span>
+              </a>
+              <ul class="nav navbar-nav navbar-right">
+    							<li>
+    								<a class="menu-item" href="#hoewerkthet">Hoe werkt het</a>
+    							</li>
+    							<li >
+    								<a class="menu-item" href="#overons">Over ons</a>
+    							</li>
+    							<li>
+    								<a class="menu-item" href="#prijzen">Prijzen</a>
+    							</li>
+    							<li>
+    								<a class="menu-item" href="#contact">Contact</a>
+    							</li>
+    					</ul>
           </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li role="separator" class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-              <li><a href="../navbar-static-top/">Static top</a></li>
-              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
       </nav>
-      
-      <h1>Uw gegevens</h1>
-      
-      <form action="/upload" method="post" enctype='multipart/form-data'>
-        <div class="form-group col-md-4">
-            <label for="firstName">Voornaam</label>
-            <input type="text" class="form-control" id="firstName" value="<%=firstname%>" readonly>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="lastName">Familienaam</label>
-            <input type="text" class="form-control" id="lastName"value="<%=lastname%>" readonly>
-        </div>
-        <div class="form-group col-md-4">
-            <label for="rrn">Rijksregisternummer</label>
-            <input type="text" class="form-control" id="rrn" value="<%=rrn%>" readonly>
-        </div>
-        <div class="form-group col-md-6">
-            <label for="email">Uw email</label>
-            <input type="email" class="form-control" id="email" name="emailFrom" placeholder="Uw email">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="email">Nogmaals uw email</label>
-            <input type="email" class="form-control" id="email" placeholder="Uw email ter controle">
-        </div>
-        <h1>Aangetekende brief</h1>
-        <div class="form-group">
-            <label for="exampleInputFile">Selecteer uw document</label>
-            <input type="file" id="exampleInputFile" name="inputfile">
-            <p class="help-block">Klik om een lokaal document te selecteren</p>
-        </div>
-        
-        <h1>Gegevens bestemmeling</h1>
-          <div class="form-group">
-            <label for="emailTo">Email bestemmeling</label>
-            <input type="email" class="form-control" id="emailTo" name="emailTo" placeholder="Email bestemmeling">
+
+      <form id="uploadform" action="/upload" method="post" enctype='multipart/form-data'>
+
+        <div class="row">
+          <h1 style="margin-top:80px;">1. Uw gegevens</h1>
+            <div class="form-group col-sm-4">
+                <label for="fNameS">Voornaam</label>
+                <input type="text" class="form-control valid" id="fNameS" value="<%=firstname%>" readonly>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="lNameS">Familienaam</label>
+                <input type="text" class="form-control valid" id="lNameS" value="<%=lastname%>" readonly>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="rrnS">Rijksregisternummer</label>
+                <input type="text" class="form-control valid" id="rrnS" value="<%=rrn%>" readonly>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="emailS">Uw email<span style="color:red"> *</span></label>
+                <input type="email" class="form-control required" id="emailS" name="emailS" placeholder="Uw email">
+                <span class="error">Dit is een verplicht veld</span>
+            </div>
+            <div class="form-group col-sm-6">
+                <label for="emailCtrl" class="required">Nogmaals uw email<span style="color:red"> *</span></label>
+                <input type="email" class="form-control valid" id="emailCtrl" name="emailCtrl" placeholder="Uw email ter controle">
+                <span class="error"><br>De door u ingevulde emailadressen verschillen. Graag even nakijken aub.</span>
+            </div>
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+          <div class="row">
+            <h1>2. Aangetekende brief</h1>
+            <div class="form-group col-sm-12">
+                <!-- <input type="file" id="exampleInputFile" name="inputfile" accept="application/pdf"> -->
+                <div class="fileinput fileinput-new" data-provides="fileinput">
+                  <span class="btn btn-primary btn-file">
+                    <span class="fileinput-new">Selecteer uw document...</span>
+                    <span class="fileinput-exists">Wijzig...</span>
+                    <input type="file" name="fileinput" id="fileinput" accept="application/pdf"></span>
+                  <span class="fileinput-filename"></span>
+                  <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
+                </div>
+                <p class="help-block">Klik om een PDF-document op uw PC te selecteren.<br>Indien u een Word-document wil opladen, dit graag eerst opslaan in PDF-formaat voor u het oplaadt.</p>
+                <span class="error"><br>Gelieve een PDF document op te laden<br>Dus graag uw document eerst opslaan in PDF formaat en het dan opladen op de website via bovenstaande knop.</span>
+            </div>
+          </div>
 
-  
+          <div class="row">
+              <h1>3. Gegevens bestemmeling</h1><br/>
+                <input type="checkbox" style="margin-left:20px;" id="company" class="valid"> Het gaat om een bedrijf<br/></br>
+                <div class="form-group col-sm-3">
+                    <label for="fNameR" id="labelVoornaam">Voornaam</label>
+                    <input type="text" class="form-control valid" id="fNameR" name="fNameR">
+                    <span class="error">Dit is een verplicht veld</span>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="lastName" id="labelFamilienaam">Familienaam</label><span style="color:red"> *</span>
+                    <input type="text" class="form-control required" id="lNameR" name="lNameR">
+                    <span class="error">Dit is een verplicht veld</span>
+                </div>
+                <div class="form-group col-sm-5">
+                    <label for="streetR">Straatnaam<span style="color:red"> *</span></label>
+                    <input type="text" class="form-control required" id="streetR" name="streetR">
+                    <span class="error">Dit is een verplicht veld</span>
+                </div>
+                <div class="form-group col-sm-1">
+                    <label for="numberR">Nummer<span style="color:red"> *</span></label>
+                    <input type="text" class="form-control required" id="numberR" name="numberR">
+                    <span class="error">Dit is een verplicht veld</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-3">
+                    <label for="zipR">Postcode<span style="color:red"> *</span></label>
+                    <input type="text" class="form-control required" id="zipR" name="zipR">
+                    <span class="error">Dit is een verplicht veld</span>
+                </div>
+                <div class="form-group col-sm-3">
+                    <label for="cityR">Stad<span style="color:red"> *</span></label>
+                    <input type="text" class="form-control required" id="cityR" name="cityR">
+                    <span class="error">Dit is een verplicht veld</span>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="emailR">Email-adres<span style="color:red"> *</span></label>
+                    <input type="text" class="form-control required" id="emailR" name="emailR">
+                    <span class="error">Dit is een verplicht veld</span>
+                </div>
+              </div>
+              <div id="success_test"></div>
+            <button id="payment" type="submit" class="btn btn-lg btn-primary">Afrekenen en verzenden</button>
+            <a id="closebutton" href="http://www.zendu.be" class="btn btn-lg btn-default" style="margin-left:5px">Cancel</a><br>
+          </form>
       </div>
+
+      <div id="feedback">
+        <div id="feedback-form" style='display:none;' class="col-xs-4 col-md-4 panel panel-default">
+          <form method="POST" action="/feedback" class="form panel-body" role="form">
+            <div class="form-group">
+              <input class="form-control" name="email" autofocus placeholder="Uw e-mail (optioneel)" type="email" />
+              <input name="screen" type="hidden" value="homepagina"/>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="body" required placeholder="Graag uw feedback hier ..." rows="5"></textarea>
+            </div>
+            <button class="btn btn-primary pull-right" type="submit">Verzend</button>
+          </form>
+        </div>
+        <div id="feedback-tab">Feedback</div>
+      </div>
+      <br/>
+      <br/>
+
+      <section id="hoewerkthet" class="bg-gray">
+    		<div class="container-fluid">
+                <div class="row text-center">
+                    <div class="col-lg-12 wow fadeIn">
+                        <p class="big-text" style="margin-top:80px;font-weight:bold;">Hoe werkt het?</p>
+                        <h3>Eenvoudig: wij printen uw brief en versturen hem aangetekend.</h3>
+                        <hr class="colored">
+                    </div>
+                </div>
+                <div class="row text-center content-row">
+                    <div class="col-md-3 col-sm-6 wow fadeIn" data-wow-delay=".2s">
+                        <div class="about-content">
+                            <i class="fa fa-edit fa-4x"></i>
+                            <h3>U schrijft de brief en laadt hem op als PDF op de website.</h3>
+                            <p class="about-text">U ontvangt automatisch een factuur zodra de brief is opgeladen en nadat u hebt betaald (via BC/MC, Visa, Maestro).</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeIn" data-wow-delay=".4s">
+                        <div class="about-content">
+                            <i class="fa fa-rocket fa-4x"></i>
+                            <h3>Wij printen uw brief en versturen hem aangetekend via de reguliere post.</h3>
+                            <p class="about-text">Brieven opgeladen voor 15u00 worden dezelfde werkdag nog verstuurd, na 15u00 de volgende werkdag.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeIn" data-wow-delay=".6s">
+                        <div class="about-content">
+                            <i class="fa fa-tablet fa-4x"></i>
+                            <h3>Het verzendingsbewijs is digitaal beschikbaar in uw applicatie.</h3>
+                            <p class="about-text">Het verzendingsbewijs wordt door ons gearchiveerd en ingescand. Met uw persoonlijk inlog kan u al uw verstuurde brieven en bijhorende verzendingsbewijzen raadplegen.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 wow fadeIn" data-wow-delay=".8s">
+                        <div class="about-content">
+                            <i class="fa fa-bullhorn fa-4x"></i>
+                            <h3>De geadresseerde ontvangt zijn aangetekende brief.</h3>
+                            <p class="about-text">Op dezelfde manier alsof u de brief zelf naar het postkantoor had gebracht.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    				<br/>
+    				<br/>
+    	</section>
+    	<section id="overons">
+    		<div class="container text-center wow fadeIn">
+                <p class="big-text" style="margin-top:80px;font-weight:bold;">Over ons</p>
+                <hr class="colored">
+                <p class="us-text">We zijn ervan overtuigd dat het verzenden van aangetekende brieven makkelijker moet kunnen. De verplichte trip naar het postkantoor is tijdrovend en onefficiënt.</p>
+                <p class="us-text">Maar ook het beheer van de verstuurde brieven kan beter en vooral eenvoudiger. Het huidig systeem van afgestempelde verzendingsbewijzen is achterhaald, omslachtig en werkt fouten in de hand.</p>
+                <p class="us-text">Dat kan beter.  We maakten daarom een toepassing die u toelaat uw brief in pdf formaat op te laden en waarbij wij de verdere stappen van het proces van aangetekende verzending afhandelen. Resultaat: tijdswinst, foutloze afhandeling en efficiënt beheer van bewijs.</p>
+                <p class="us-text">Daarnaast willen we nog een stap verder gaan. De EU Richtlijn 910/2014 laat toe om op legale wijze aangetekende brieven via elektronische weg te verzenden en dit vanaf 1 juli 2016. Onze technologie laat toe om tegen dan het verzenden van uw aangetekende brief volledig elektronisch af te handelen.
+                Dit betekent een fundamenteel lagere kostprijs, een snellere afhandeling én aangetekende brieven verzenden binnen heel Europa.</p>
+            </div>
+    				<br/>
+    				<br/>
+    	</section>
+    	<section id="prijzen" class="pricing" style="background-image:url('images/bg-footer.jpg');height:600px">
+    		<div class="container wow fadeIn">
+    				<div class="row content-row">
+    						<div class="col-md-4">
+    						</div>
+    						<div class="col-md-4">
+    								<div class="pricing-item featured" style="margin-top:80px;">
+    										<p class="big-text" style="font-weight:bold;">Prijs</p>
+    										<hr class="colored">
+    										<div class="price"><span class="number">6.20<sup>&euro;</sup></span> / brief</div>
+    										<ul class="list-group">
+    												<li class="list-group-item">1 individuele brief</li>
+    												<li class="list-group-item">Maximum 10 pagina's</li>
+    												<li class="list-group-item">Opgeladen voor 15u00, dezelfde dag aangetekend verzonden</li>
+    										</ul>
+    										<a href="#" class="btn btn-primary btn-lg">Starten</a>
+    								</div>
+    						</div>
+    						<div class="col-md-4">
+
+    						</div>
+    				</div>
+    		</div>
+    	</section>
+    	<footer id="footer" class="container-fluid row8">
+            <div class="container text-center" style="margin-top:50px">
+                <div class="row">
+                    <div class="col-md-4 contact-details">
+                        <h1><i class="fa fa-phone"></i> Call</h1>
+                        <p>0489 62 19 67</p>
+                    </div>
+                    <div class="col-md-4 contact-details">
+                        <h1><i class="fa fa-map-marker"></i> Visit</h1>
+                        <p>BVBA CEEJAY<br>
+                           Huybrechtsstraat 76<br>
+                           2140 Borgerhout</p>
+                    </div>
+                    <div class="col-md-4 contact-details">
+                        <h1><i class="fa fa-envelope"></i> Email</h1>
+                        <p><a href="mailto:mail@example.com">info@zendu.be</a>
+                        </p>
+                    </div>
+                </div>
+    						<br/>
+    						<br/>
+                <div class="row copyright">
+                    <div class="col-lg-12">
+                        <p class="small">&copy; 2016 Zendu.be Aangetekende brieven</p>
+                        <p class="small"><a href="disclaimer.html">Disclaimer</a> &nbsp &nbsp <a href="cookies.html">Cookies Policy</a> &nbsp &nbsp <a href="geheimhouding.html">Geheimhoudingsverklaring</a></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="js/jasny-bootstrap.min.js"></script>
+    <script src="js/feedback.js"></script>
+    <script>
+    (function($) {
+
+      "use strict"; // Start of use strict
+
+      //controle op zelfde emailadres
+      $('#emailCtrl').on('focusout',function(){
+  			var email = $('#emailS').val();
+  			var check = $('#emailCtrl').val();
+
+  			var error_element=$("p", $('#emailCtrl').parent());
+  			if(email!=check){
+  					error_element.removeClass("error").addClass("error_show");
+  			}else{
+  					error_element.removeClass("error_show").addClass("error");
+  			}
+  		});
+
+      //controle op ingevulde velden bij focusout
+      $('#emailS').on('focusout', function() {
+        var input=$(this);
+        var is_emailS=input.val();
+        if(is_emailS){input.removeClass("invalid").addClass("valid");}
+        else{input.removeClass("valid").addClass("invalid");}
+      });
+
+      $('#lNameR').on('focusout', function() {
+        var input=$(this);
+        var is_emailS=input.val();
+        if(is_emailS){
+          input.removeClass("invalid").addClass("valid");
+          $("span",$("#lNameR").parent()).removeClass("error_show").addClass("error");}
+        else{input.removeClass("valid").addClass("invalid");}
+      });
+
+      $('#streetR').on('focusout', function() {
+        var input=$(this);
+        var is_emailS=input.val();
+        if(is_emailS){
+          input.removeClass("invalid").addClass("valid");
+          $("span",$("#streetR").parent()).removeClass("error_show").addClass("error");}
+        else{input.removeClass("valid").addClass("invalid");}
+      });
+
+      $('#numberR').on('focusout', function() {
+        var input=$(this);
+        var is_emailS=input.val();
+        if(is_emailS){
+          input.removeClass("invalid").addClass("valid");
+          $("span",$("#numberR").parent()).removeClass("error_show").addClass("error");}
+        else{input.removeClass("valid").addClass("invalid");}
+      });
+
+      $('#zipR').on('focusout', function() {
+        var input=$(this);
+        var is_emailS=input.val();
+        if(is_emailS){
+          input.removeClass("invalid").addClass("valid");
+          $("span",$("#zipR").parent()).removeClass("error_show").addClass("error");}
+        else{input.removeClass("valid").addClass("invalid");}
+      });
+
+      $('#cityR').on('focusout', function() {
+        var input=$(this);
+        var is_emailS=input.val();
+        if(is_emailS){
+          input.removeClass("invalid").addClass("valid");
+          $("span",$("#cityR").parent()).removeClass("error_show").addClass("error");}
+        else{input.removeClass("valid").addClass("invalid");}
+      });
+
+      $('#emailR').on('focusout', function() {
+        var input=$(this);
+        var is_emailS=input.val();
+        if(is_emailS){
+          input.removeClass("invalid").addClass("valid");
+          $("span",$("#emailR").parent()).removeClass("error_show").addClass("error");}
+        else{input.removeClass("valid").addClass("invalid");}
+      });
+
+      //check on file extension
+      // $("#fileinput1").change(function(){
+      //     var filename = $("#fileinput1").val();
+      //     var extension = filename.match(/\.([^\.]+)$/)[1];
+      //     console.log(extension);
+      //     var error_element=$("span",$("#fileinput1").parent());
+      //     if(extension!="pdf"){
+      //         error_element.removeClass("error").addClass("error_show");
+      //     }else{
+      //         error_element.removeClass("error_show").addClass("error");
+      //     }
+      // });
+
+      //controle bij submit
+      $("#payment").click(function(){
+        var form_data=$("#uploadform").serializeArray();
+        console.log(form_data);
+      	var error_free=true;
+      	for (var input in form_data){
+      	    if(form_data[input]['name']){
+      		    var element=$("#"+form_data[input]['name']);
+      		    var valid=element.hasClass("valid")||element==$("#");
+      		    var error_element=$("span", element.parent());
+      		    if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
+      		    else{error_element.removeClass("error_show").addClass("error");}
+      	    }
+      	}
+      	//check file upload
+      	var filename = $("#fileinput").val();
+      	if (!filename){
+      	    error_free=false;
+      	    var error_element = $("span",$("#fileinput").parent());
+      	    error_element.removeClass("error").addClass("error_show");
+      	}
+
+      	if (!error_free){
+      		event.preventDefault();
+          console.log('error');
+      		$('#success_test').html("<div class='alert alert-danger'>");
+              $('#success_test > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;").append("</button>");
+              $('#success_test > .alert-danger').append("<strong>Er ontbreken gegevens, kijk even na aub.</strong>");
+              $('#success_test > .alert-danger').append('</div>');
+      	}
+      	else{
+              console.log('success');
+              $('#success_test').html("<div class='alert alert-success'>");
+              $('#success_test > .alert-success').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;").append("</button>");
+              $('#success_test > .alert-success').append("<img height='20px' width='20px' src='assets/img/loader.gif'/><strong> Even geduld, uw brief wordt opgeladen en daarna wordt u doorgezonden naar de betaalpagina.</strong>");
+              $('#success_test > .alert-success').append('</div>');
+      	}
+
+      });
+
+      //company switch
+      $('#company').click(function(){
+        if($('#company').is(':checked')){
+          console.log('checked');
+          $('#labelVoornaam').text("Afdeling");
+          $('#labelFamilienaam').text("Bedrijfsnaam");
+        }else{
+          $('#labelVoornaam').text("Voornaam");
+          $('#labelFamilienaam').text("Familienaam");
+        }
+      });
+
+    })(jQuery);
+
+    </script>
   </body>
 </html>

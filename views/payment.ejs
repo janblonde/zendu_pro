@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Zendu</title>
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link type="image/x-icon" rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABKUlEQVQ4jb3SzyvlURjH8VdYiKRrrh/ZzP9AtsJfwHYm1CT8ARQ7ljasLPwJmt1sLGz8aGzUdJMuM/KjFPmxkMRkgcV51O3mq1vKU6fO0znvz/N8nnP4xBjCbzzgHw4qBfNYwT2WMYIOnFQCt2IPRXTjF+bxHY9ZUA168AOnAefQjP0Q+YntcjCHCcnfc6xdNJTcaUcvnvCtvOp6tLWEaxTQiK4Qfy2yh9Xy6lUYxR2OsIk6jEUnnWGhiL9oyfI/IE17AsMBj0flgjT5tiy4DXO4KpnBIGrxp0TszfgSrZ1hQ/osz5iM/CLyviyBKdxKQ4M1XAZ0jtkQyfR+iOnY56OTOfSH8H8sZMGkd13EDG6kD/M1zkawhab3BI4l3zuS7/qy8+r34A/FC5cqTDh6ZYEVAAAAAElFTkSuQmCC">
+</head>
+<body>
+  <!--<h2 style="margin-top:80px;">u wordt doorverwezen naar de betaalpagina.</h2>-->
+  <nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+					<a href="/" class="navbar-brand" style="text-shadow: 0 0 0;">
+							<span style="color: white; font-size: 24px;">Zen</span><span style="color: firebrick; font-size: 24px;">du</span>
+					</a>
+					<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a class="menu-item" href="#aangetekende brief">Hoe werkt het</a>
+							</li>
+							<li >
+								<a class="menu-item" href="#aangetekende brief">Over ons</a>
+							</li>
+							<li>
+								<a class="menu-item" href="#aangetekende brief">Prijzen</a>
+							</li>
+							<li>
+								<a class="menu-item" href="#aangetekende brief">Contact</a>
+							</li>
+					</ul>
+			</div>
+	</nav>
+<form id="paymentform" name="paymentform" action="https://test.docdatapayments.com/ps/menu" method="post">
+  <INPUT type="hidden" NAME="payment_cluster_key" value="<%=docdatakey%>">
+  <INPUT type="hidden" NAME="merchant_name" VALUE="zendu_be">
+  <INPUT type="hidden" NAME="return_url_success" VALUE="https://www.zendu.be/success.jsp">
+  <INPUT type="hidden" NAME="return_url_canceled" VALUE="https://www.zendu.be/success.jsp">
+  <INPUT type="hidden" NAME="return_url_error" VALUE="https://www.zendu.be/success.jsp">
+  <input type="submit" value="SUBMIT" id="submit2" name="submit2" hidden>
+</form>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+<script>
+window.onload = function(){
+  document.forms['paymentform'].submit();
+}
+// $(document).ready(function(){
+//   $("#paymentform").submit();
+// });
+</script>
+</body>
+</html>
