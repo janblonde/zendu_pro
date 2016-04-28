@@ -127,6 +127,27 @@ app.post('/upload', upload.any(), function(req, res) {
     });
 });
 
+app.get('/paymentcallback',function(req,res){
+  console.log('callback');
+  console.log(req.body);
+  console.log(req.params);
+  console.log(req.body.orderID);
+  var orderID = req.body.orderID;
+
+  Brief.find({id: orderID},function(error, doc){
+    if(error){
+      console.log('error on payment callback');
+    }else {
+      var subject = "Uw aangetekende brief verzonden via Zendu.be";
+      var text = "Uw document werd goed door ons ontvangen en wordt aangetekend verstuurd. Als bijlage de door u verzonden PDF.";
+      mySendMailWithAttachment(doc.emailS, subject, text, doc.docID);
+
+      subject = "Een nieuwe aangetekende brief"
+      text = "zie bijlage " + JSON.stringify(doc);
+      mySendMailWithAttachment('info@zendu.be', subject, text, doc.docID);
+    }
+  })
+
 app.post('/paymentcallback',function(req,res){
   console.log('callback');
   console.log(req.body);
