@@ -131,13 +131,13 @@ app.get('/paymentcallback',function(req,res){
   console.log('callback');
   console.log(req.body);
   console.log(req.params);
-  console.log(req.body.orderID);
-  var orderID = req.body.orderID;
+  console.log(req.params.orderID);
+  var orderID = req.params.orderID;
 
   Brief.find({id: orderID},function(error, doc){
     if(error){
       console.log('error on payment callback');
-    }else {
+    }else{
       var subject = "Uw aangetekende brief verzonden via Zendu.be";
       var text = "Uw document werd goed door ons ontvangen en wordt aangetekend verstuurd. Als bijlage de door u verzonden PDF.";
       mySendMailWithAttachment(doc.emailS, subject, text, doc.docID);
@@ -303,7 +303,7 @@ function makeSOAPCall(brief,response,orderID){
        var docdatakey=buffer.substring(buffer.lastIndexOf("<key>")+5,buffer.lastIndexOf("</key>"));
        console.log(docdatakey);
        console.log(buffer);
-         response.render('payment',{docdatakey:docdatakey});
+         response.render('payment',{docdatakey:docdatakey,orderID:orderID});
        });
      });
 
