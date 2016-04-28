@@ -129,10 +129,8 @@ app.post('/upload', upload.any(), function(req, res) {
 
 app.get('/paymentcallback',function(req,res){
   console.log('GET callback');
-  console.log(req.body);
-  console.log(req.params);
-  console.log(req.params.orderID);
-  var orderID = req.params.orderID;
+  console.log(req.query);
+  var orderID = req.query.orderID;
 
   Brief.find({id: orderID},function(error, doc){
     if(error){
