@@ -147,6 +147,7 @@ app.get('/paymentcallback',function(req,res){
       mySendMailWithAttachment('info@zendu.be', subject, text, doc.docID);
     }
   })
+});
 
 app.post('/paymentcallback',function(req,res){
   console.log('callback');
