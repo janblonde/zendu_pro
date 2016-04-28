@@ -17,10 +17,21 @@
 <body onload="init();">
 	<nav id="navbar" class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
 					<a href="/" class="navbar-brand" style="text-shadow: 0 0 0;">
 							<span style="color: white; font-size: 24px;">Zen</span><span style="color: firebrick; font-size: 24px;">du</span>
 					</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a class="menu-item page-scroll" href="https://localhost/form">Starten</a>
+						</li>
 							<li>
 								<a class="menu-item page-scroll" href="#hoewerkthet">Hoe werkt het</a>
 							</li>
@@ -28,10 +39,10 @@
 								<a class="menu-item page-scroll" href="#overons">Over ons</a>
 							</li>
 							<li>
-								<a class="menu-item" href="#prijzen">Prijzen</a>
+								<a class="menu-item page-scroll" href="#prijzen">Prijzen</a>
 							</li>
 							<li>
-								<a class="menu-item" href="#aangetekende brief">Contact</a>
+								<a class="menu-item page-scroll" href="#footer">Contact</a>
 							</li>
 					</ul>
 			</div>
@@ -46,7 +57,8 @@
 								<br/><br/>
 						</p>
 						<p>
-      				<a id="cta" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal" role="button">Meld u aan met uw eID</a>
+							<a id="cta" class="btn btn-lg btn-primary" href="https://localhost/form" role="button" onclick="ga('send','event','button','click','cta_starten')">Starten</a>
+      				<!-- <a id="cta" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#myModal" role="button">Meld u aan met uw eID</a> -->
     				</p>
 						<!-- Modal -->
 						<div class="modal fade" style="margin-top: 50px" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -142,7 +154,7 @@
 				<br/>
 				<br/>
 	</section>
-	<section id="prijzen" class="pricing" style="background-image:url('images/bg-footer.jpg');height:600px">
+	<section id="prijzen" class="pricing" style="background-image:url('images/bg-footer.jpg');height:650px">
 		<div class="container wow fadeIn">
 				<div class="row content-row">
 						<div class="col-md-4">
@@ -157,7 +169,7 @@
 												<li class="list-group-item">Maximum 10 pagina's</li>
 												<li class="list-group-item">Opgeladen voor 15u00, dezelfde dag aangetekend verzonden</li>
 										</ul>
-										<a href="#" class="btn btn-primary btn-lg">Starten</a>
+										<a href="#" class="btn btn-primary btn-lg" style="font-size:36px">Starten</a>
 								</div>
 						</div>
 						<div class="col-md-4">
@@ -212,6 +224,7 @@
 
 
 	<script src="js/jquery-1.11.2.min.js"></script>
+	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 
 	<script src="js/easeljs-0.6.0.min.js"></script>
@@ -243,6 +256,15 @@
 		loader.addEventListener("complete", handleComplete);
 		loader.loadManifest(manifest);
 	}
+
+	$('a.page-scroll').bind('click', function(event) {
+				console.log('page-scroll');
+        var $anchor = $(this);
+        $('html, body').stop().animate({
+            scrollTop: ($($anchor.attr('href')).offset().top - 50)
+        }, 1500, 'easeInOutExpo');
+        event.preventDefault();
+    });
 
 	function handleFileLoad(evt) {
 		if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
@@ -282,21 +304,15 @@
 		  });
 	}
 
-	(function($) {
-    "use strict"; // Start of use strict
+	</script>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    // Smooth Scrolling: Smooth scrolls to an ID on the current page.
-    // To use this feature, add a link on your page that links to an ID, and add the .page-scroll class to the link itself. See the docs for more details.
-    $('a.page-scroll').bind('click', function(event) {
-        var $anchor = $(this);
-        $('html, body').stop().animate({
-            scrollTop: ($($anchor.attr('href')).offset().top)
-        }, 2500, 'easeInOutExpo');
-        event.preventDefault();
-    });
-
-	})(jQuery);
-
+		ga('create', 'UA-69587403-1', 'auto');
+		ga('send', 'pageview');
 	</script>
 </body>
 </html>

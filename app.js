@@ -43,7 +43,8 @@ var httpsOptions = {
         ],
     ciphers: 'ECDHE-RSA-AES128-SHA256:AES128-GCM-SHA256:RC4:HIGH:!MD5:!aNULL:!EDH',
     honorCipherOrder: true,
-    requestCert: true,
+    // requestCert: true,
+    requestCert: false,
     rejectUnauthorized: false
 };
 
@@ -73,18 +74,14 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // Form, protected by client certificate - maybe call cer
-app.get('/form', clientCertificateAuth(validateCertificate), function(req, res) {
-  if(clientCertificateAuth(validateCertificate)){
-      var clientCertificate   = req.connection.getPeerCertificate();
-      var clientName           = clientCertificate.subject.SN;
-      var clientFirstName      = clientCertificate.subject.GN;
-      var clientNationalNumber = clientCertificate.subject.serialNumber;
-
-      res.render('form', {firstname: clientFirstName, lastname: clientName, rrn: clientNationalNumber});
-
-  }else{
-      res.status("401").json({status:'failed'});
-  }
+// app.get('/form', clientCertificateAuth(validateCertificate), function(req, res) {
+//   if(clientCertificateAuth(validateCertificate)){
+//       var clientCertificate   = req.connection.getPeerCertificate();
+//       var clientName           = clientCertificate.subject.SN;
+//       var clientFirstName      = clientCertificate.subject.GN;
+//       var clientNationalNumber = clientCertificate.subject.serialNumber;
+app.get('/form', function(req,res){
+      res.render('form', {});
 });
 
 // Validate the contents of the certificate
@@ -99,17 +96,16 @@ var upload = multer({dest: './uploads/'});
 app.post('/upload', upload.any(), function(req, res) {
     //TODO: optimize the async of save/sign/send
 
-    //console.log(req);
-    console.log(req.body);
-    console.log(req.files[0].filename);
-
     //sign and timestamp the pdf
-    signPDF(req.files[0].filename);
+    //signPDF(req.files[0].filename);
 
     var brief = new Brief({
       fNameS: req.body.fNameS,
       lNameS: req.body.lNameS,
-      rrnS: req.body.rrnS,
+      streetS: req.body.streetS,
+      numberS: req.body.numberS,
+      zipS: req.body.zipS,
+      cityS: req.body.cityS,
       emailS: req.body.emailS,
       fNameR: req.body.fNameR,
       lNameR: req.body.lNameR,
@@ -117,20 +113,13 @@ app.post('/upload', upload.any(), function(req, res) {
       numberR: req.body.numberR,
       zipR: req.body.zipR,
       cityR: req.body.cityR,
-      emailR: req.body.emailR,
       docID: req.files[0].filename,
       createdAt: new Date(Date.now()),
     });
 
-    console.log(brief.lNameS);
-
     brief.save(function(err, doc){
         if(!err){
-
             var paymentKey = makeSOAPCall(brief,res,doc.id);
-            //console.log(paymentKey);
-
-            //res.render('confirm', {});
         }else{
             console.log(err);
             return res.send(500,err);
@@ -148,11 +137,11 @@ app.post('/paymentcallback',function(req,res){
     }else {
       var subject = "Uw aangetekende brief verzonden via Zendu.be";
       var text = "Uw document werd goed door ons ontvangen en wordt aangetekend verstuurd. Als bijlage de door u verzonden PDF.";
-      mySendMailWithAttachment(doc.emailS, subject, text, doc.docID+'.pdf');
+      mySendMailWithAttachment(doc.emailS, subject, text, doc.docID);
 
       subject = "Een nieuwe aangetekende brief"
       text = "zie bijlage " + JSON.stringify(doc);
-      mySendMailWithAttachment('info@zendu.be', subject, text, doc.docID+'.pdf');
+      mySendMailWithAttachment('info@zendu.be', subject, text, doc.docID);
     }
   })
 
@@ -231,7 +220,7 @@ function mySendMailWithAttachment(emailTo, subjectText, bodyText, fileName){
         text: bodyText,
         attachments: [
             {
-                filename: fileName,
+                filename: fileName+'.pdf',
                 path: 'signed/' + fileName,
                 contentType:'application/pdf'
             }
@@ -309,7 +298,7 @@ var httpsServer = https.createServer(httpsOptions, app);
 // httpServer.listen(3000);
 // httpsServer.listen(4443);
 httpServer.listen(80);
-httpsServer.listen(4443);
+httpsServer.listen(443);
 
 httpsServer.on('error', function (e) {
   // Handle your error here

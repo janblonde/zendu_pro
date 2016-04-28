@@ -122,7 +122,8 @@
 }
 
 #cta {
-    margin-left:30%;
+		font-size:36px;
+    margin-left:40%;
     margin-top: 5%;
     position:relative;
     z-index:99;
