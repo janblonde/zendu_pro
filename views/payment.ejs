@@ -38,12 +38,12 @@
   <INPUT type="hidden" NAME="return_url_success" VALUE="https://54.93.61.144/paymentcallback?orderID=<%=orderID%>&status=success">
   <INPUT type="hidden" NAME="return_url_canceled" VALUE="https://54.93.61.144/paymentcallback?orderID=<%=orderID%>&status=cancelled">
   <INPUT type="hidden" NAME="return_url_error" VALUE="https://54.93.61.144/paymentcallback?orderID=<%orderID%>&status=error">
-  <input type="submit" value="SUBMIT" id="submit2" name="submit2">
+  <input type="submit" value="SUBMIT" id="submit2" name="submit2" hidden>
 </form>
 <script>
-// window.onload = function(){
-//   document.forms['paymentform'].submit();
-// }
+window.onload = function(){
+  document.forms['paymentform'].submit();
+}
 </script>
 </body>
 </html>
