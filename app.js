@@ -210,7 +210,7 @@ function mySendMailWithAttachment(emailTo, subjectText, bodyText, fileName){
         attachments: [
             {
                 filename: fileName+'.pdf',
-                path: 'signed/' + fileName,
+                path: 'uploads/' + fileName,
                 contentType:'application/pdf'
             }
         ]
