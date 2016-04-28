@@ -80,7 +80,7 @@ app.set('view engine', 'ejs');
 //       var clientName           = clientCertificate.subject.SN;
 //       var clientFirstName      = clientCertificate.subject.GN;
 //       var clientNationalNumber = clientCertificate.subject.serialNumber;
-app.get('/form', function(req,res){
+
       res.render('form', {});
 });
 
@@ -132,17 +132,17 @@ app.get('/paymentcallback',function(req,res){
   console.log(req.query);
   var orderID = req.query.orderID;
 
-  Brief.find({id: orderID},function(error, doc){
+  Brief.find({_id: orderID},function(error, doc){
     if(error){
       console.log('error on payment callback');
     }else{
       var subject = "Uw aangetekende brief verzonden via Zendu.be";
       var text = "Uw document werd goed door ons ontvangen en wordt aangetekend verstuurd. Als bijlage de door u verzonden PDF.";
-      mySendMailWithAttachment(doc.emailS, subject, text, doc.docID);
+      mySendMailWithAttachment(doc[0].emailS, subject, text, doc[0].docID);
 
       subject = "Een nieuwe aangetekende brief"
       text = "zie bijlage " + JSON.stringify(doc);
-      mySendMailWithAttachment('info@zendu.be', subject, text, doc.docID);
+      mySendMailWithAttachment('info@zendu.be', subject, text, doc[0].docID);
     }
   });
   res.status(200).json({status:'success'});
