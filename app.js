@@ -73,6 +73,7 @@ app.use(function(err, req, res, next) {
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
+app.get('/form', function(req,res){
 // Form, protected by client certificate - maybe call cer
 // app.get('/form', clientCertificateAuth(validateCertificate), function(req, res) {
 //   if(clientCertificateAuth(validateCertificate)){
