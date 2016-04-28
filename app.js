@@ -128,7 +128,7 @@ app.post('/upload', upload.any(), function(req, res) {
 });
 
 app.get('/paymentcallback',function(req,res){
-  console.log('callback');
+  console.log('GET callback');
   console.log(req.body);
   console.log(req.params);
   console.log(req.params.orderID);
@@ -146,42 +146,8 @@ app.get('/paymentcallback',function(req,res){
       text = "zie bijlage " + JSON.stringify(doc);
       mySendMailWithAttachment('info@zendu.be', subject, text, doc.docID);
     }
-  })
-});
-
-app.post('/paymentcallback',function(req,res){
-  console.log('callback');
-  console.log(req.body);
-  console.log(req.body.orderID);
-  var orderID = req.body.orderID;
-
-  Brief.find({id: orderID},function(error, doc){
-    if(error){
-      console.log('error on payment callback');
-    }else {
-      var subject = "Uw aangetekende brief verzonden via Zendu.be";
-      var text = "Uw document werd goed door ons ontvangen en wordt aangetekend verstuurd. Als bijlage de door u verzonden PDF.";
-      mySendMailWithAttachment(doc.emailS, subject, text, doc.docID);
-
-      subject = "Een nieuwe aangetekende brief"
-      text = "zie bijlage " + JSON.stringify(doc);
-      mySendMailWithAttachment('info@zendu.be', subject, text, doc.docID);
-    }
-  })
-
-  //TODO: integrate this in paymentcallback
-  // //send mail to recipient
-  // var text = "Klik op deze link om uw identiteit te bevestigen en de aangetekende brief te ontvangen: " +
-  //            "http://localhost:3000/confirm/" + doc.id;
-  // var subject = "U ontving een digitale aangetekende brief";
-  // mySendMail(doc.emailR, subject, text);
-  //
-  // //send mail to sender
-  // text = "Uw document werd goed door ons ontvangen en wordt aangetekend verstuurd naar " + doc.emailR + ". <br>" +
-  // " Als bijlage de PDF (signed en timestamped).";
-  // subject = "Uw aangetekende brief";
-  // mySendMailWithAttachment(doc.emailS, subject, text,doc.docID+'.pdf');
-
+  });
+  res.status(200).json({status:'success'});
 });
 
 app.post('/feedback', function(req,res) {
