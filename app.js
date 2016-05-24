@@ -132,6 +132,7 @@ app.get('/paymentcallback',function(req,res){
   console.log('GET callback');
   console.log(req.query);
   var orderID = req.query.orderID;
+  var status = req.query.status;
 
   Brief.find({_id: orderID},function(error, doc){
     if(error){
@@ -146,7 +147,11 @@ app.get('/paymentcallback',function(req,res){
       mySendMailWithAttachment('info@zendu.be', subject, text, doc[0].docID);
     }
   });
-  res.render('confirm_send', {});
+  if(status!=='cancelled'){
+    res.render('confirm_send', {});
+  }else{
+    res.render('form', {});
+  }
   //res.status(200).json({status:'success'});
 });
 
@@ -230,7 +235,7 @@ function makeSOAPCall(response, doc){
   var fname = 'Jan';
   var lname = 'Blonde';
   var email = 'jan.blonde@icloud.com';
-  var amount = '980';
+  var amount = '620';
   var street = 'Huybrechtsstraat';
   var number = '76';
   var zip = '2140';
