@@ -146,7 +146,8 @@ app.get('/paymentcallback',function(req,res){
       mySendMailWithAttachment('info@zendu.be', subject, text, doc[0].docID);
     }
   });
-  res.status(200).json({status:'success'});
+  res.render('confirm_send', {});
+  //res.status(200).json({status:'success'});
 });
 
 app.post('/feedback', function(req,res) {
