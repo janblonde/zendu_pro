@@ -120,7 +120,7 @@ app.post('/upload', upload.any(), function(req, res) {
 
     brief.save(function(err, doc){
         if(!err){
-            var paymentKey = makeSOAPCall(brief,res,doc.id);
+            var paymentKey = makeSOAPCall(doc);
         }else{
             console.log(err);
             return res.send(500,err);
@@ -223,7 +223,7 @@ function mySendMailWithAttachment(emailTo, subjectText, bodyText, fileName){
     });
 }
 
-function makeSOAPCall(brief,response,orderID){
+function makeSOAPCall(doc){
   var mor = '12345ZETUNOG11';
   var sid = '1234';
   var fname = 'Jan';
@@ -237,16 +237,16 @@ function makeSOAPCall(brief,response,orderID){
 
 
   var soapbody = '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.docdatapayments.com/services/paymentservice/1_3/"><SOAP-ENV:Header/><SOAP-ENV:Body>'+
-  '<ns1:createRequest version="1.3"><ns1:merchant name="zendu_be" password="Quyazu3e"/><ns1:merchantOrderReference>'+orderID+'</ns1:merchantOrderReference>'+
+  '<ns1:createRequest version="1.3"><ns1:merchant name="zendu_be" password="StED6xun"/><ns1:merchantOrderReference>'+doc.id+'</ns1:merchantOrderReference>'+
   '<ns1:paymentPreferences><ns1:profile>mytestprofile</ns1:profile><ns1:numberOfDaysToPay>14</ns1:numberOfDaysToPay></ns1:paymentPreferences>'+
   '<ns1:menuPreferences><ns1:css id="5"/></ns1:menuPreferences>' +
-  '<ns1:shopper id="'+sid+'"><ns1:name><ns1:first>'+fname+'</ns1:first><ns1:last>'+lname+'</ns1:last></ns1:name><ns1:email>'+email+'</ns1:email><ns1:language code="nl"/><ns1:gender>M</ns1:gender></ns1:shopper>'+
+  '<ns1:shopper id="'+sid+'"><ns1:name><ns1:first>'+doc.fnameS+'</ns1:first><ns1:last>'+doc.lNameS+'</ns1:last></ns1:name><ns1:email>'+doc.emailS+'</ns1:email><ns1:language code="nl"/><ns1:gender>M</ns1:gender></ns1:shopper>'+
   '<ns1:totalGrossAmount currency="EUR">'+amount+'</ns1:totalGrossAmount>'+
-  '<ns1:billTo><ns1:name><ns1:first>'+fname+'</ns1:first><ns1:last>'+lname+'</ns1:last></ns1:name>'+
-  '<ns1:address><ns1:street>'+street+'</ns1:street><ns1:houseNumber>'+number+'</ns1:houseNumber><ns1:postalCode>'+zip+'</ns1:postalCode><ns1:city>'+city+'</ns1:city><ns1:country code="BE"/></ns1:address></ns1:billTo></ns1:createRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+  '<ns1:billTo><ns1:name><ns1:first>'+doc.fnameS+'</ns1:first><ns1:last>'+doc.lNameS+'</ns1:last></ns1:name>'+
+  '<ns1:address><ns1:street>'+doc.streetS+'</ns1:street><ns1:houseNumber>'+doc.numberS+'</ns1:houseNumber><ns1:postalCode>'+doc.zipS+'</ns1:postalCode><ns1:city>'+doc.cityS+'</ns1:city><ns1:country code="BE"/></ns1:address></ns1:billTo></ns1:createRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>'
 
   var postRequest = {
-      host: 'test.docdatapayments.com',
+      host: 'secure.docdatapayments.com',
       path: "/ps/services/paymentservice/1_3",
       port: 443,
       method: "POST",
@@ -268,7 +268,7 @@ function makeSOAPCall(brief,response,orderID){
        var docdatakey=buffer.substring(buffer.lastIndexOf("<key>")+5,buffer.lastIndexOf("</key>"));
        console.log(docdatakey);
        console.log(buffer);
-         response.render('payment',{docdatakey:docdatakey,orderID:orderID});
+         response.render('payment',{docdatakey:docdatakey,orderID:doc.id});
        });
      });
 

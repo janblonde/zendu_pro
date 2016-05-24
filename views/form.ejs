@@ -62,32 +62,34 @@
               <div class="form-group col-sm-3">
                   <label for="lNameS">Familienaam<span style="color:red"> *</span></label>
                   <input type="text" class="form-control required" id="lNameS" name="lNameS">
-                  <span class="error">Dit is een verplicht veld</span>
+                  <span id="err_lNameS" class="error">Dit is een verplicht veld</span>
               </div>
               <div class="form-group col-sm-5">
                   <label for="streetS">Straatnaam<span style="color:red"> *</span></label>
                   <input type="text" class="form-control required" id="streetS" name="streetS">
-                  <span class="error">Dit is een verplicht veld</span>
+                  <span id="err_streetS" class="error">Dit is een verplicht veld</span>
               </div>
               <div class="form-group col-sm-1">
                   <label for="numberS">Nummer<span style="color:red">*</span></label>
                   <input type="text" class="form-control required" id="numberS" name="numberS">
-                  <span class="error">Dit is een verplicht veld</span>
+                  <span id="err_numberS" class="error">Dit is een verplicht veld</span>
               </div>
+            </div>
+            <div class="row">
               <div class="form-group col-sm-2">
                   <label for="zipS">Postcode<span style="color:red"> *</span></label>
                   <input type="text" class="form-control required" id="zipS" name="zipS">
-                  <span class="error">Dit is een verplicht veld</span>
+                  <span id="err_zipS" class="error">Dit is een verplicht veld</span>
               </div>
               <div class="form-group col-sm-2">
                   <label for="cityS">Stad<span style="color:red"> *</span></label>
                   <input type="text" class="form-control required" id="cityS" name="cityS">
-                  <span class="error">Dit is een verplicht veld</span>
+                  <span id="err_cityS" class="error">Dit is een verplicht veld</span>
               </div>
               <div class="form-group col-sm-4">
                   <label for="emailS">Uw email<span style="color:red"> *</span></label>
                   <input type="email" class="form-control required" id="emailS" name="emailS" placeholder="Uw email">
-                  <span class="error">Dit is een verplicht veld</span>
+                  <span id="err_emailS" class="error">Dit is een verplicht veld</span>
               </div>
               <div class="form-group col-sm-4">
                   <label for="emailCtrl" class="required">Nogmaals uw email<span style="color:red"> *</span></label>
@@ -109,7 +111,7 @@
                     <a href="#" class="close fileinput-exists" data-dismiss="fileinput" style="float: none">&times;</a>
                   </div>
                   <p class="help-block">Klik om een PDF-document op uw PC te selecteren.<br>Indien u een Word-document wil opladen, dit graag eerst opslaan in PDF-formaat voor u het oplaadt.</p>
-                  <span class="error"><br>Gelieve een PDF document op te laden<br>Dus graag uw document eerst opslaan in PDF formaat en het dan opladen op de website via bovenstaande knop.</span>
+                  <span id="err_fileinput" class="error"><br>Gelieve een PDF document op te laden<br>Dus graag uw document eerst opslaan in PDF formaat en het dan opladen op de website via bovenstaande knop.</span>
               </div>
             </div>
 
@@ -119,38 +121,38 @@
                   <div class="form-group col-sm-2">
                       <label for="fNameR" id="labelVoornaam">Voornaam</label>
                       <input type="text" class="form-control valid" id="fNameR" name="fNameR">
-                      <span class="error">Dit is een verplicht veld</span>
+                      <span id="err_fNameR" class="error">Dit is een verplicht veld</span>
                   </div>
                   <div class="form-group col-sm-2">
                       <label for="lastName" id="labelFamilienaam">Familienaam</label><span style="color:red"> *</span>
                       <input type="text" class="form-control required" id="lNameR" name="lNameR">
-                      <span class="error">Dit is een verplicht veld</span>
+                      <span id="err_lNameR" class="error">Dit is een verplicht veld</span>
                   </div>
                   <div class="form-group col-sm-3">
                       <label for="streetR">Straatnaam<span style="color:red"> *</span></label>
                       <input type="text" class="form-control required" id="streetR" name="streetR">
-                      <span class="error">Dit is een verplicht veld</span>
+                      <span id="err_streetR" class="error">Dit is een verplicht veld</span>
                   </div>
                   <div class="form-group col-sm-1">
                       <label for="numberR">Nummer<span style="color:red">*</span></label>
                       <input type="text" class="form-control required" id="numberR" name="numberR">
-                      <span class="error">Dit is een verplicht veld</span>
+                      <span id="err_numberR" class="error">Dit is een verplicht veld</span>
                   </div>
 
                   <div class="form-group col-sm-2">
                       <label for="zipR">Postcode<span style="color:red"> *</span></label>
                       <input type="text" class="form-control required" id="zipR" name="zipR">
-                      <span class="error">Dit is een verplicht veld</span>
+                      <span id="err_zipR" class="error">Dit is een verplicht veld</span>
                   </div>
                   <div class="form-group col-sm-2">
                       <label for="cityR">Stad<span style="color:red"> *</span></label>
                       <input type="text" class="form-control required" id="cityR" name="cityR">
-                      <span class="error">Dit is een verplicht veld</span>
+                      <span id="err_cityR" class="error">Dit is een verplicht veld</span>
                   </div>
                 </div>
                 <div id="success_test"></div>
               <button id="payment" type="submit" class="btn btn-lg btn-primary" onclick="ga('send','event','button','click','form_pay')">Afrekenen en verzenden</button>
-              <a id="closebutton" href="http://54.93.61.144/" class="btn btn-lg btn-default" style="margin-left:5px">Cancel</a><br>
+              <a id="closebutton" href="http://www.zendu.be/" class="btn btn-lg btn-default" style="margin-left:5px">Cancel</a><br>
             </form>
           </section>
       </div>
@@ -229,7 +231,7 @@
     				<br/>
     				<br/>
     	</section>
-    	<section id="prijzen" class="pricing" style="background-image:url('images/bg-footer.jpg');height:600px">
+    	<section id="prijzen" class="pricing" style="background-image:url('images/bg-footer.jpg');height:650px">
     		<div class="container wow fadeIn">
     				<div class="row content-row">
     						<div class="col-md-4">
@@ -268,7 +270,7 @@
                     </div>
                     <div class="col-md-4 contact-details">
                         <h1><i class="fa fa-envelope"></i> Email</h1>
-                        <p><a href="mailto:mail@example.com">info@zendu.be</a>
+                        <p><a href="mailto:info@zendu.be">info@zendu.be</a>
                         </p>
                     </div>
                 </div>
@@ -320,7 +322,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#lNameS").parent()).removeClass("error_show").addClass("error");}
+          $('#err_lNameS').removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -329,7 +331,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#streetS").parent()).removeClass("error_show").addClass("error");}
+          $("#err_streetS").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -338,7 +340,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#numberS").parent()).removeClass("error_show").addClass("error");}
+          $("#err_numberS").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -347,7 +349,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#zipS").parent()).removeClass("error_show").addClass("error");}
+          $("#err_zipS").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -356,11 +358,10 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#cityS").parent()).removeClass("error_show").addClass("error");}
+          $("#err_cityS").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
-      //controle op ingevulde velden bij focusout
       $('#emailS').on('focusout', function() {
         var input=$(this);
         var is_emailS=input.val();
@@ -373,7 +374,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#lNameR").parent()).removeClass("error_show").addClass("error");}
+          $("#err_lNameR").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -382,7 +383,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#streetR").parent()).removeClass("error_show").addClass("error");}
+          $("#err_streetR").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -391,7 +392,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#numberR").parent()).removeClass("error_show").addClass("error");}
+          $("#err_numberR").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -400,7 +401,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#zipR").parent()).removeClass("error_show").addClass("error");}
+          $("#err_zipR").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -409,7 +410,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#cityR").parent()).removeClass("error_show").addClass("error");}
+          $("#err_cityR").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -418,7 +419,7 @@
         var is_emailS=input.val();
         if(is_emailS){
           input.removeClass("invalid").addClass("valid");
-          $("span",$("#emailR").parent()).removeClass("error_show").addClass("error");}
+          $("#err_emailR").removeClass("error_show").addClass("error");}
         else{input.removeClass("valid").addClass("invalid");}
       });
 
@@ -437,23 +438,130 @@
 
       //controle bij submit
       $("#payment").click(function(){
-        var form_data=$("#uploadform").serializeArray();
-        console.log(form_data);
-      	var error_free=true;
-      	for (var input in form_data){
-      	    if(form_data[input]['name']){
-      		    var element=$("#"+form_data[input]['name']);
-      		    var valid=element.hasClass("valid")||element==$("#");
-      		    var error_element=$("span", element.parent());
-      		    if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
-      		    else{error_element.removeClass("error_show").addClass("error");}
-      	    }
-      	}
+        var error_free = true;
+
+        if($('#lNameS').val()){
+          $('#lNameS').removeClass("invalid").addClass("valid");
+          $('#err_lNameS').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_lNameS').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#streetS').val()){
+          $('#streetS').removeClass("invalid").addClass("valid");
+          $('#err_streetS').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_streetS').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#numberS').val()){
+          $('#numberS').removeClass("invalid").addClass("valid");
+          $('#err_numberS').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_numberS').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#zipS').val()){
+          $('#zipS').removeClass("invalid").addClass("valid");
+          $('#err_zipS').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_zipS').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#numberS').val()){
+          $('#numberS').removeClass("invalid").addClass("valid");
+          $('#err_numberS').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_numberS').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#cityS').val()){
+          $('#cityS').removeClass("invalid").addClass("valid");
+          $('#err_cityS').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_cityS').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#emailS').val()){
+          $('#emailS').removeClass("invalid").addClass("valid");
+          $('#err_emailS').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_emailS').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#lNameR').val()){
+          $('#lNameR').removeClass("invalid").addClass("valid");
+          $('#err_lNameR').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_emailS').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#streetR').val()){
+          $('#streetR').removeClass("invalid").addClass("valid");
+          $('#err_streetR').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_streetR').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#numberR').val()){
+          $('#numberR').removeClass("invalid").addClass("valid");
+          $('#err_numberR').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_numberR').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#zipR').val()){
+          $('#zipR').removeClass("invalid").addClass("valid");
+          $('#err_zipR').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_zipR').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#cityR').val()){
+          $('#cityR').removeClass("invalid").addClass("valid");
+          $('#err_cityR').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_cityR').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        if($('#emailR').val()){
+          $('#emailR').removeClass("invalid").addClass("valid");
+          $('#err_emailR').removeClass("error_show").addClass("error");
+        }else{
+          $('#err_emailR').removeClass("error").addClass("error_show");
+          error_free=false;
+        };
+
+        // var form_data=$("#uploadform").serializeArray();
+        // console.log(form_data);
+      	// var error_free=true;
+      	// for (var input in form_data){
+      	//     if(form_data[input]['name']){
+      	// 	    var element=$("#"+form_data[input]['name']);
+      	// 	    var valid=element.hasClass("valid")||element==$("#");
+      	// 	    var error_element=$("span", element.parent());
+      	// 	    if (!valid){error_element.removeClass("error").addClass("error_show"); error_free=false;}
+      	// 	    else{error_element.removeClass("error_show").addClass("error");}
+      	//     }
+      	// }
+
       	//check file upload
       	var filename = $("#fileinput").val();
       	if (!filename){
       	    error_free=false;
-      	    var error_element = $("span",$("#fileinput").parent());
+      	    var error_element = $("#err_fileinput");
       	    error_element.removeClass("error").addClass("error_show");
       	}
 

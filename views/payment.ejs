@@ -32,12 +32,12 @@
 					</ul>
 			</div>
 	</nav>
-<form id="paymentform" name="paymentform" action="https://test.docdatapayments.com/ps/menu" method="post">
+<form id="paymentform" name="paymentform" action="https://secure.docdatapayments.com/ps/menu" method="post">
   <INPUT type="hidden" NAME="payment_cluster_key" value="<%=docdatakey%>">
   <INPUT type="hidden" NAME="merchant_name" VALUE="zendu_be">
-  <INPUT type="hidden" NAME="return_url_success" VALUE="https://54.93.61.144/paymentcallback?orderID=<%=orderID%>&status=success">
-  <INPUT type="hidden" NAME="return_url_canceled" VALUE="https://54.93.61.144/paymentcallback?orderID=<%=orderID%>&status=cancelled">
-  <INPUT type="hidden" NAME="return_url_error" VALUE="https://54.93.61.144/paymentcallback?orderID=<%orderID%>&status=error">
+  <INPUT type="hidden" NAME="return_url_success" VALUE="https://www.zendu.be/paymentcallback?orderID=<%=orderID%>&status=success">
+  <INPUT type="hidden" NAME="return_url_canceled" VALUE="https://www.zendu.be/paymentcallback?orderID=<%=orderID%>&status=cancelled">
+  <INPUT type="hidden" NAME="return_url_error" VALUE="https://www.zendu.be/paymentcallback?orderID=<%orderID%>&status=error">
   <input type="submit" value="SUBMIT" id="submit2" name="submit2" hidden>
 </form>
 <script>
