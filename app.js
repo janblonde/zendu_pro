@@ -14,7 +14,6 @@ var request               = require('request');
 
 //db set-up
 mongoose.connect('mongodb://localhost/zendu');
-//var db = mongoose.connection;
 
 //email set-up
 var smtpTransport = nodemailer.createTransport({
@@ -254,7 +253,7 @@ function makeSOAPCall(response, doc){
   '<ns1:shopper id="'+sid+'"><ns1:name><ns1:first>'+doc.fnameS+'</ns1:first><ns1:last>'+doc.lNameS+'</ns1:last></ns1:name><ns1:email>'+doc.emailS+'</ns1:email><ns1:language code="nl"/><ns1:gender>M</ns1:gender></ns1:shopper>'+
   '<ns1:totalGrossAmount currency="EUR">'+amount+'</ns1:totalGrossAmount>'+
   '<ns1:billTo><ns1:name><ns1:first>'+doc.fnameS+'</ns1:first><ns1:last>'+doc.lNameS+'</ns1:last></ns1:name>'+
-  '<ns1:address><ns1:street>'+doc.streetS+'</ns1:street><ns1:houseNumber>'+doc.numberS+'</ns1:houseNumber><ns1:postalCode>'+doc.zipS+'</ns1:postalCode><ns1:city>'+doc.cityS+'</ns1:city><ns1:country code="BE"/></ns1:address></ns1:billTo></ns1:createRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>'
+  '<ns1:address><ns1:street>'+doc.streetS+'</ns1:street><ns1:houseNumber>'+doc.numberS+'</ns1:houseNumber><ns1:postalCode>'+doc.zipS+'</ns1:postalCode><ns1:city>'+doc.cityS+'</ns1:city><ns1:country code="BE"/></ns1:address></ns1:billTo><ns1:description>Versturen van 1 aangetekende brief</ns1:description></ns1:createRequest></SOAP-ENV:Body></SOAP-ENV:Envelope>'
 
   var postRequest = {
       host: 'secure.docdatapayments.com',
