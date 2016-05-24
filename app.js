@@ -120,7 +120,7 @@ app.post('/upload', upload.any(), function(req, res) {
 
     brief.save(function(err, doc){
         if(!err){
-            var paymentKey = makeSOAPCall(doc);
+            var paymentKey = makeSOAPCall(res, doc);
         }else{
             console.log(err);
             return res.send(500,err);
@@ -223,7 +223,7 @@ function mySendMailWithAttachment(emailTo, subjectText, bodyText, fileName){
     });
 }
 
-function makeSOAPCall(doc){
+function makeSOAPCall(response, doc){
   var mor = '12345ZETUNOG11';
   var sid = '1234';
   var fname = 'Jan';
