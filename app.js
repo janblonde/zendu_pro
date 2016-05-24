@@ -133,7 +133,7 @@ app.get('/paymentcallback',function(req,res){
   var orderID = req.query.orderID;
   var status = req.query.status;
 
-  if(status!=='cancelled'){
+  if(status=='success'){
 
     Brief.find({_id: orderID},function(error, doc){
       if(error){
@@ -249,7 +249,7 @@ function makeSOAPCall(response, doc){
   var soapbody = '<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://www.docdatapayments.com/services/paymentservice/1_3/"><SOAP-ENV:Header/><SOAP-ENV:Body>'+
   '<ns1:createRequest version="1.3"><ns1:merchant name="zendu_be" password="StED6xun"/><ns1:merchantOrderReference>'+doc.id+'</ns1:merchantOrderReference>'+
   '<ns1:paymentPreferences><ns1:profile>mytestprofile</ns1:profile><ns1:numberOfDaysToPay>14</ns1:numberOfDaysToPay></ns1:paymentPreferences>'+
-  '<ns1:menuPreferences><ns1:css id="1"/></ns1:menuPreferences>' +
+  '<ns1:menuPreferences><ns1:css id="5"/></ns1:menuPreferences>' +
   '<ns1:shopper id="'+sid+'"><ns1:name><ns1:first>'+doc.fnameS+'</ns1:first><ns1:last>'+doc.lNameS+'</ns1:last></ns1:name><ns1:email>'+doc.emailS+'</ns1:email><ns1:language code="nl"/><ns1:gender>M</ns1:gender></ns1:shopper>'+
   '<ns1:totalGrossAmount currency="EUR">'+amount+'</ns1:totalGrossAmount>'+
   '<ns1:billTo><ns1:name><ns1:first>'+doc.fnameS+'</ns1:first><ns1:last>'+doc.lNameS+'</ns1:last></ns1:name>'+
